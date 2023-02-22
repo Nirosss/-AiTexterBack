@@ -9,7 +9,7 @@ const openai = new OpenAIApi(configuration)
 const translate = async (text, to) => {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt: `## Rewrite this text:\n${text} to ${to} English`,
+    prompt: `## Rewrite this text:\n${text} in a ${to} English`,
     temperature: 0.3,
     max_tokens: 256,
     top_p: 1.0,
