@@ -26,7 +26,7 @@ function getPrompt(text, to) {
   switch (to) {
     case "Formal":
       return `Convert the following text into a more formal and official style, giving it a more professional tone:\n\n${text}`
-    case "grammer correct":
+    case "grammar":
       return `Correct the grammar and spelling of the following text. don't leave any notes about the correction:\n\n${text}`
     case "Casual":
       return `Convert the following text into a more casual and popular style, giving it a more natural tone:\n\n${text}`
