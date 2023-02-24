@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 })
 
 app.use((req, res, next) => {
-  console.log(`Received request ${req.method} ${req.url} ${req.hostname}`)
+  // console.log(`Received request ${req.method} ${req.url} ${req.hostname}`)
   next()
 })
 

@@ -35,7 +35,6 @@ function setPrompt(text, formatStyle) {
     case 'Senior program developer':
     case 'HR specialist':
       prompt = `## Rewrite this text:\n"${text}"\n like a ${formatStyle} would say it`
-      console.log(prompt)
       break
     case 'Corporate':
       prompt = `## Rewrite this text:\n"${text}"\n in a ${formatStyle} style`
