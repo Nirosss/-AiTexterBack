@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const translateRouter = require('./routes/translate')
 const cors = require('cors')
+const path = require('path')
 const app = express()
 
 if (process.env.NODE_ENV === 'production') {
@@ -34,6 +35,10 @@ app.use((req, res, next) => {
 app.use(express.json())
 
 app.use('/translate', translateRouter)
+
+app.get('/**', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
