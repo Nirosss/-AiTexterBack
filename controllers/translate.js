@@ -6,6 +6,8 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
+
+
 const translate = async (text, to) => {
   const prompt = getPrompt(text, to)
   
