@@ -9,7 +9,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, 'public')))
 } else {
   const corsOptions = {
-    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
+    origin: [
+      'http://127.0.0.1:5173',
+      'http://localhost:5173',
+      'http://localhost:8080',
+      'http://127.0.0.1:8080',
+    ],
     credentials: true,
   }
   app.use(cors(corsOptions))
@@ -26,6 +31,7 @@ app.use((req, res, next) => {
   )
   next()
 })
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
   console.log(`Received request ${req.method} ${req.url} ${req.hostname}`)
@@ -37,7 +43,14 @@ app.use(express.json())
 app.use('/translate', translateRouter)
 
 app.get('/**', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+  res.setHeader('Content-Type', 'application/javascript')
+  res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+    console.log(req.params)
+    if (err) {
+      // Handle the error and send a response
+      res.status(404).send('File not found')
+    }
+  })
 })
 
 app.listen(PORT, () => {
