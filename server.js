@@ -33,6 +33,13 @@ app.use((req, res, next) => {
   )
   next()
 })
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://aitexter.onrender.com');
+  next();
+});
+
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
