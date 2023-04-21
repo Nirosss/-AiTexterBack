@@ -5,15 +5,22 @@ const cors = require('cors')
 const path = require('path')
 const app = express()
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, 'public')))
-} else {
-  const corsOptions = {
-    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
-    credentials: true,
-  }
-  app.use(cors(corsOptions))
+app.use(express.static(path.resolve(__dirname, 'public')))
+const corsOptions = {
+  origin: ['http://127.0.0.1:5173', 'http://localhost:5173', "https://cloud.appwrite.io/v1"],
+  credentials: true,
 }
+app.use(cors(corsOptions))
+
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.resolve(__dirname, 'public')))
+// } else {
+//   const corsOptions = {
+//     origin: ['http://127.0.0.1:5173', 'http://localhost:5173', "https://cloud.appwrite.io/v1"],
+//     credentials: true,
+//   }
+//   app.use(cors(corsOptions))
+// }
 
 const PORT = process.env.PORT || 8080
 
