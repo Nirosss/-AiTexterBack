@@ -5,10 +5,24 @@ const cors = require('cors')
 const path = require('path')
 const app = express()
 
+<<<<<<< HEAD
 app.use(express.static(path.resolve(__dirname, 'public')))
 const corsOptions = {
   origin: ['http://127.0.0.1:5173', 'http://localhost:5173', "https://cloud.appwrite.io/v1"],
   credentials: true,
+=======
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, 'public')))
+} else {
+  const corsOptions = {
+    origin: [
+      'http://127.0.0.1:5173',
+      'http://localhost:5173'
+    ],
+    credentials: true,
+  }
+  app.use(cors(corsOptions))
+>>>>>>> ef8d41244cf9cca79fde1b07f33e377a9c1e61d3
 }
 app.use(cors(corsOptions))
 
@@ -33,6 +47,7 @@ app.use((req, res, next) => {
   )
   next()
 })
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
   console.log(`Received request ${req.method} ${req.url} ${req.hostname}`)
@@ -44,7 +59,14 @@ app.use(express.json())
 app.use('/translate', translateRouter)
 
 app.get('/**', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+  res.setHeader('Content-Type', 'application/javascript')
+  res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+    console.log(req.params)
+    if (err) {
+      // Handle the error and send a response
+      res.status(404).send('File not found')
+    }
+  })
 })
 
 app.listen(PORT, () => {
