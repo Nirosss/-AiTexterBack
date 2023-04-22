@@ -5,6 +5,7 @@
     "express": "^4.18.2",
     "mime": "^3.0.0",
     "mime-types": "^2.1.35",
+    "node-appwrite": "^8.2.0",
     "nodemon": "^2.0.20",
     "openai": "^3.1.0",
     "path": "^0.12.7"

@@ -5,22 +5,15 @@ const cors = require('cors')
 const path = require('path')
 const app = express()
 
-app.use(express.static(path.resolve(__dirname, 'public')))
-const corsOptions = {
-  origin: ['http://127.0.0.1:5173', 'http://localhost:5173', "https://cloud.appwrite.io/v1"],
-  credentials: true,
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, 'public')))
+} else {
+  const corsOptions = {
+    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
+    credentials: true,
+  }
+  app.use(cors(corsOptions))
 }
-app.use(cors(corsOptions))
-
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.resolve(__dirname, 'public')))
-// } else {
-//   const corsOptions = {
-//     origin: ['http://127.0.0.1:5173', 'http://localhost:5173', "https://cloud.appwrite.io/v1"],
-//     credentials: true,
-//   }
-//   app.use(cors(corsOptions))
-// }
 
 const PORT = process.env.PORT || 8080
 
@@ -34,13 +27,6 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://aitexter.onrender.com');
-  next();
-});
-
-
-app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
   console.log(`Received request ${req.method} ${req.url} ${req.hostname}`)
