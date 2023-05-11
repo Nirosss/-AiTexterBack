@@ -50,6 +50,8 @@ function getPrompt(text, to) {
         return `Display 10 variations of the following text: \n\n\"${text}" \n\n BUT Convert the text so it will sound like a business chief talking to customers`
       case "Documentation":
         return `Display 10 variations of the following text: \n\n\"${text}" \n\n BUT Convert the text so it will sound like a documentation of an api or a web service`
+      case "hr":
+        return `Display 10 variations of the following text: \n\n\"${text}" \n\n BUT Convert the text so it will sound as an HR talking to an employee`
       default:
         return text
   }
