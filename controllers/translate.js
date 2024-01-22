@@ -1,7 +1,8 @@
 const { Configuration, OpenAIApi } = require('openai')
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: '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'
+  // process.env.OPENAI_API_KEY,
 })
 
 const openai = new OpenAIApi(configuration)
@@ -9,11 +10,11 @@ const openai = new OpenAIApi(configuration)
 
 
 const translate = async (text, to) => {
-  console.log(text)
+  
   const prompt = getPrompt(text, to)
   
   const response = await openai.createCompletion({
-    model: 'text-davinci-003',
+    model: 'gpt-3.5-turbo-instruct',
     prompt,
     temperature: 0.3,
     max_tokens: 256,

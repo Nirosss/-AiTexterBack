@@ -48,7 +48,6 @@ app.use('/translate', translateRouter)
 app.get('/**', (req, res) => {
   res.setHeader('Content-Type', 'application/javascript')
   res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
-    console.log(req.params)
     if (err) {
       // Handle the error and send a response
       res.status(404).send('File not found')

@@ -7,7 +7,7 @@
     "mime-types": "^2.1.35",
     "node-appwrite": "^8.2.0",
     "nodemon": "^2.0.20",
-    "openai": "^3.1.0",
+    "openai": "^3.3.0",
     "path": "^0.12.7"
   },
   "name": "server",
